@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Notifications, { notify } from 'react-notify-toast';
 import Spinner from './components/Spinner';
 import Images from './components/Images';
 import Buttons from './components/Buttons';
@@ -16,8 +15,6 @@ export default class App extends Component {
     uploading: false,
     images: [],
   };
-
-  toast = notify.createShowQueue();
 
   onChange = (e) => {
     const errs = [];
@@ -104,7 +101,6 @@ export default class App extends Component {
 
     return (
       <div className="container">
-        <Notifications />
         <div className="buttons">
           {content()}
         </div>

@@ -1,8 +1,7 @@
 const filterService = require('../services/filter.service');
 
 const filter = async (req, res, next) => {
-  const filterParams = {};
-  const result = await filterService.filter(filterParams);
+  const result = await filterService.filter(req.query);
   return res.json(result);
 };
 

@@ -1,5 +1,5 @@
-const filter = require('./filter.controller');
+const filterController = require('./filter.controller');
 
 module.exports = {
-  filter,
+  filterController,
 };

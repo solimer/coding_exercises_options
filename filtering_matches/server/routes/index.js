@@ -4,6 +4,6 @@ const router = express.Router();
 
 const { filterController } = require('../controllers');
 
-router.post('/filter', filterController.filter);
+router.get('/filter', filterController.filter);
 
 module.exports = router;
