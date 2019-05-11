@@ -1,5 +1,7 @@
 const db = require('../db');
-const { BooleanFilter, ExistFilter } = require('../filters');
+const {
+  BooleanFilter, ExistFilter, RangeFilter, PercentageRangeFilter,
+} = require('../filters');
 
 const filter = async (params) => {
   let data = db.getAll();
@@ -8,14 +10,18 @@ const filter = async (params) => {
   Object.keys(params).forEach((fName) => {
     switch (fName) {
       case 'hasPhoto':
-        data = new ExistFilter(data).getFilteredData('main_photo');
-        break;
       case 'inContacts':
-        data = new ExistFilter(data).getFilteredData('contacts_exchanged');
+        data = new ExistFilter(data).getFilteredData(fName);
         break;
       case 'isFavourite':
-        data = new BooleanFilter(data).getFilteredData('favourite', params[fName]);
+        data = new BooleanFilter(data).getFilteredData(fName, params[fName]);
         break;
+      case 'compatibility':
+        data = new PercentageRangeFilter(data).getFilteredData(fName, params[fName]);
+        break;
+      case 'age':
+      case 'height':
+        data = new RangeFilter(data).getFilteredData(fName, params[fName]);
       default:
         return new Error('Invalid query type');
     }

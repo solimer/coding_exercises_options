@@ -1,12 +1,12 @@
 const BaseFilter = require('./baseFilter');
 
 class BooleanFilter extends BaseFilter {
-  validate(value) {
-    return value === 'true' || value === 'false';
+  validate() {
+    return (this.value === 'true' || this.value === 'false');
   }
 
-  filter(propName, value) {
-    return this.data.filter(entry => (value === 'true' ? entry[propName] : !entry[propName]));
+  filter(propName) {
+    return this.data.filter(entry => (this.value === 'true' ? entry[propName] : !entry[propName]));
   }
 }
 
