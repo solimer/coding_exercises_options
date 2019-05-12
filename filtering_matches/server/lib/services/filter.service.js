@@ -1,11 +1,11 @@
-const db = require('../db');
+const DB = require('../db');
 const {
   BooleanFilter, ExistFilter, RangeFilter, PercentageRangeFilter, DistanceFilter,
 } = require('../filters');
 const { id: activeUserId } = require('../utils/user')();
 
 const filter = async (params) => {
-  let data = db.getAll().filter(entry => entry.id !== activeUserId);
+  let data = DB.getAll().filter(entry => entry.id !== activeUserId);
   if (!params) return data;
 
   Object.keys(params).forEach((fName) => {

@@ -7,13 +7,15 @@
     "rules": {
         "max-len": [2, { "code": 120 }],
         "react/no-array-index-key": 0,
+        "class-methods-use-this": 0,
         "no-param-reassign": "off",
         "jsx-a11y/label-has-associated-control": "off",
         "jsx-a11y/label-has-for": "off",
         "no-underscore-dangle": "off"
     },
     "env": {
-        "browser": true,
-        "es6": true
+        "node": true,
+        "es6": true,
+        "mocha": true
     }
 }

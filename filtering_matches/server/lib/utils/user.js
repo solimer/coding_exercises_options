@@ -1,3 +1,3 @@
-const db = require('../db');
+const DB = require('../db');
 
-module.exports = () => db.getActiveUserData();
+module.exports = () => DB.getActiveUserData();

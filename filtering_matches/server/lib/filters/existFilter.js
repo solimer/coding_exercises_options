@@ -1,7 +1,7 @@
 const BaseFilter = require('./baseFilter');
 
-class BooleanFilter extends BaseFilter {
-  validate() {
+class ExistFilter extends BaseFilter {
+  extractValues() {
     return true;
   }
 
@@ -10,4 +10,4 @@ class BooleanFilter extends BaseFilter {
   }
 }
 
-module.exports = BooleanFilter;
+module.exports = ExistFilter;

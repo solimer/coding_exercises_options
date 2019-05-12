@@ -9,7 +9,7 @@
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "start": "node server/index.js",
     "test": "mocha --recursive --opts \"./server/test/mocha.opts\" server/test",
-    "test-coverage": "nyc mocha"
+    "test-coverage": "nyc mocha --recursive --opts \"./server/test/mocha.opts\" server/test"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -31,6 +31,7 @@
     "mocha": "^6.1.4",
     "nyc": "^14.1.1",
     "should": "^13.2.3",
-    "should-sinon": "^0.0.6"
+    "should-sinon": "^0.0.6",
+    "sinon": "^7.3.2"
   }
 }

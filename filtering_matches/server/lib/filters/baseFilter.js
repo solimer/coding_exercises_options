@@ -8,9 +8,12 @@ class BaseFilter {
     this.to = null;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  validate() {
-    throw new Error('Not implemented');
+  validate(query) {
+    return !!this.getConstants()[query];
+  }
+
+  getConstants() {
+    return constants;
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -20,13 +23,15 @@ class BaseFilter {
 
   // eslint-disable-next-line class-methods-use-this
   extractValues(values) {
+    if (!values) return false;
     this.value = values;
+    return true;
   }
 
   getFilteredData(query, value) {
-    this.extractValues(value);
-    if (!this.validate(value, query)) return null;
-    const { propName } = constants[query];
+    if (!this.extractValues(value)) return null;
+    if (!this.validate(query)) return null;
+    const { propName } = this.getConstants()[query];
     return this.filter(propName);
   }
 }

@@ -1,17 +1,22 @@
 const BaseFilter = require('./baseFilter');
-const constants = require('./constants');
 
 class RangeFilter extends BaseFilter {
   extractValues(values) {
+    if (!super.extractValues(values)) return null;
+
     const reg = new RegExp(/>(\d*)<(\d*)/g);
-    const [, from, to] = reg.exec(values);
+    const regRes = reg.exec(values);
+    if (!regRes || regRes.length < 3) return null;
+
+    const [, from, to] = regRes;
     this.from = from;
     this.to = to;
+    return true;
   }
 
-  validate(value, query) {
-    const { minValue, maxValue } = constants[query];
-    return this.from >= minValue && this.to <= maxValue;
+  validate(query) {
+    const { minValue, maxValue } = this.getConstants()[query];
+    return super.validate(query) && this.from >= minValue && this.to <= maxValue;
   }
 
   filter(propName) {

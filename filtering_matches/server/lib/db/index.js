@@ -1,6 +1,13 @@
 const data = require('./matches');
 
-module.exports = {
-  getAll: () => data.matches,
-  getActiveUserData: () => data.matches[0],
-};
+class DB {
+  static getAll() {
+    return data.matches;
+  }
+
+  static getActiveUserData() {
+    return data.matches[0];
+  }
+}
+
+module.exports = DB;

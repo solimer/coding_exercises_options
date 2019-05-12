@@ -1,17 +1,18 @@
 const BaseFilter = require('./baseFilter');
-const constants = require('./constants');
 const activeUser = require('../utils/user');
 
 class DistanceFilter extends BaseFilter {
   extractValues(values) {
+    if (!super.extractValues(values)) return false;
     this.value = values;
     const { lat, lon } = activeUser().city;
     this.lat = lat;
     this.lon = lon;
+    return true;
   }
 
-  validate(value, query) {
-    const { minValue, maxValue } = constants[query];
+  validate(query) {
+    const { minValue, maxValue } = this.getConstants()[query];
     return this.value >= minValue && this.value <= maxValue;
   }
 
