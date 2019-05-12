@@ -27,7 +27,7 @@ class BaseFilter {
     this.extractValues(value);
     if (!this.validate(value, query)) return null;
     const { propName } = constants[query];
-    return this.filter(propName, value);
+    return this.filter(propName);
   }
 }
 

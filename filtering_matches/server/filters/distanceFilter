@@ -1,0 +1,38 @@
+const BaseFilter = require('./baseFilter');
+const constants = require('./constants');
+const activeUser = require('../utils/user');
+
+class DistanceFilter extends BaseFilter {
+  extractValues(values) {
+    this.value = values;
+    const { lat, lon } = activeUser().city;
+    this.lat = lat;
+    this.lon = lon;
+  }
+
+  validate(value, query) {
+    const { minValue, maxValue } = constants[query];
+    return this.value >= minValue && this.value <= maxValue;
+  }
+
+  calculateDistance({ lat: userLat, lon: userLon }) {
+    const R = 6371; // Radius of the earth in km
+    const dLat = this.deg2rad(userLat - this.lat);
+    const dLon = this.deg2rad(userLon - this.lon);
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
+      + Math.cos(this.deg2rad(this.lat)) * Math.cos(this.deg2rad(userLat))
+      * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  }
+
+  deg2rad(deg) {
+    return deg * (Math.PI / 180);
+  }
+
+  filter() {
+    return this.data.filter(entry => this.calculateDistance(entry.city) <= this.value);
+  }
+}
+
+module.exports = DistanceFilter;
