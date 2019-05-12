@@ -1,0 +1,6 @@
+--require should
+--require should-sinon
+--sort
+--check-leaks
+--timeout 5000
+--colors

@@ -8,10 +8,10 @@
     "server": "nodemon --inspect server/index.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "start": "node server/index.js",
-    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "test": "mocha --recursive --opts \"./server/test/mocha.opts\" server/test",
+    "test-coverage": "nyc mocha"
   },
   "dependencies": {
-
     "body-parser": "^1.18.3",
     "dotenv": "^8.0.0",
     "dotenvenc": "^1.0.4",
@@ -27,6 +27,10 @@
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.13.0",
-    "eslint-plugin-react-hooks": "^1.6.0"
+    "eslint-plugin-react-hooks": "^1.6.0",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
+    "should": "^13.2.3",
+    "should-sinon": "^0.0.6"
   }
 }
