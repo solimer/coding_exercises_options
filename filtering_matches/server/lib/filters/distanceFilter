@@ -12,6 +12,7 @@ class DistanceFilter extends BaseFilter {
   }
 
   validate(query) {
+    if (!super.validate(query)) return null;
     const { minValue, maxValue } = this.getConstants()[query];
     return this.value >= minValue && this.value <= maxValue;
   }

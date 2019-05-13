@@ -4,7 +4,7 @@ const should = require('should');
 const DistanceFilter = require('../../../lib/filters/distanceFilter');
 const data = require('../../mockData/data');
 const stubConstants = require('../../helpers/constants_stub');
-const stubActiveUser = require('../../helpers/activeUser_stub');
+const stubActiveUser = require('../../helpers/db_stub');
 const DB = require('../../../lib/db');
 
 describe('Distance Filter', () => {

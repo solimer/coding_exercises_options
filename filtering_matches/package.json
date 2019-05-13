@@ -8,8 +8,8 @@
     "server": "nodemon --inspect server/index.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "start": "node server/index.js",
-    "test": "mocha --recursive --opts \"./server/test/mocha.opts\" server/test",
-    "test-coverage": "nyc mocha --recursive --opts \"./server/test/mocha.opts\" server/test"
+    "test": "mocha --opts \"./server/test/mocha.opts\" server/test",
+    "test-coverage": "nyc mocha --opts \"./server/test/mocha.opts\" server/test"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -32,6 +32,7 @@
     "nyc": "^14.1.1",
     "should": "^13.2.3",
     "should-sinon": "^0.0.6",
-    "sinon": "^7.3.2"
+    "sinon": "^7.3.2",
+    "supertest": "^4.0.2"
   }
 }

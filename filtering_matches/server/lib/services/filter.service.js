@@ -5,33 +5,27 @@ const {
 const { id: activeUserId } = require('../utils/user')();
 
 const filter = async (params) => {
-  let data = DB.getAll().filter(entry => entry.id !== activeUserId);
+  const data = DB.getAll().filter(entry => entry.id !== activeUserId);
   if (!params) return data;
 
-  Object.keys(params).forEach((fName) => {
+  return Object.keys(params).reduce((acc, fName) => {
     switch (fName) {
       case 'hasPhoto':
       case 'inContacts':
-        data = new ExistFilter(data).getFilteredData(fName);
-        break;
+        return new ExistFilter(acc).getFilteredData(fName);
       case 'isFavourite':
-        data = new BooleanFilter(data).getFilteredData(fName, params[fName]);
-        break;
+        return new BooleanFilter(acc).getFilteredData(fName, params[fName]);
       case 'compatibility':
-        data = new PercentageRangeFilter(data).getFilteredData(fName, params[fName]);
-        break;
+        return new PercentageRangeFilter(acc).getFilteredData(fName, params[fName]);
       case 'age':
       case 'height':
-        data = new RangeFilter(data).getFilteredData(fName, params[fName]);
-        break;
+        return new RangeFilter(acc).getFilteredData(fName, params[fName]);
       case 'distance':
-        data = new DistanceFilter(data).getFilteredData(fName, params[fName]);
-        break;
+        return new DistanceFilter(acc).getFilteredData(fName, params[fName]);
       default:
-        return new Error('Invalid query type');
+        throw new Error('Invalid query type');
     }
-  });
-  return data;
+  }, data);
 };
 
 module.exports = {

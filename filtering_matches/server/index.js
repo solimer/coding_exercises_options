@@ -1,11 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-
 const routes = require('./lib/routes');
+const config = require('../config');
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = config.server.port || 5000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,4 +19,15 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
   });
 }
-app.listen(port, () => console.log(`Listening on port ${port}`));
+const server = app.listen(port, () => console.log(`Listening on port ${port}`));
+
+function shutDown() {
+  console.log('Received kill signal, shutting down gracefully');
+  server.close(() => {
+    console.log('Closed out remaining connections');
+    process.exit(0);
+  });
+}
+
+process.on('SIGTERM', shutDown);
+process.on('SIGINT', shutDown);

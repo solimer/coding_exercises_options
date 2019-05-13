@@ -49,6 +49,23 @@
       "contacts_exchanged": 5,
       "favourite": false,
       "religion": "Christian"
+    },
+    {
+      "id": 3,
+      "display_name": "Marta",
+      "age": 55,
+      "job_title": "Finance",
+      "height_in_cm": 140,
+      "city": {
+        "name": "Eastbourne",
+        "lat": 50.768036,
+        "lon": 0.290472
+      },
+      "main_photo": "http://thecatapi.com/api/images/get?format=src&type=gif",
+      "compatibility_score": 0.41,
+      "contacts_exchanged": 0,
+      "favourite": false,
+      "religion": "Agnostic"
     }
   ]
 }

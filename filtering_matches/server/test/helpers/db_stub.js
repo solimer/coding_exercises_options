@@ -6,6 +6,7 @@ const testData = require('../mockData/data');
 module.exports = () => {
   const sandbox = sinon.createSandbox();
   sandbox.stub(DB, 'getActiveUserData').returns(testData.matches[0]);
+  sandbox.stub(DB, 'getAll').returns(testData.matches);
 
   return {
     restore() {

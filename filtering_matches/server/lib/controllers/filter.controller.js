@@ -1,8 +1,14 @@
 const filterService = require('../services/filter.service');
 
 const filter = async (req, res, next) => {
-  const result = await filterService.filter(req.query);
-  return res.json(result);
+  let result;
+  try {
+    result = await filterService.filter(req.query);
+  } catch (e) {
+    result = e;
+  }
+  res.json(result);
+  next();
 };
 
 module.exports = {
