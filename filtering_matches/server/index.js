@@ -5,7 +5,10 @@ const mongoose = require('mongoose');
 const routes = require('./lib/routes');
 const config = require('../config');
 
-mongoose.connect('mongodb://admin:Sparks123@ds157256.mlab.com:57256/matches', { useNewUrlParser: true });
+mongoose.connect(
+  `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/matches`,
+  { useNewUrlParser: true },
+);
 // mongoose.set('useCreateIndex', true);
 // mongoose.Promise = global.Promise;
 
