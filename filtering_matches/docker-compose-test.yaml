@@ -6,7 +6,7 @@ services:
       - mongo
     ports:
       - "5000:5000"
-    command: ['yarn', 'migrate-and-start']
+    command: ['yarn', 'migrate-with-test']
     volumes:
       - type: bind
         source: .

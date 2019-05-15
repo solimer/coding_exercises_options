@@ -11,7 +11,8 @@
     "test": "mocha --opts \"./server/test/mocha.opts\" server/test",
     "test-coverage": "nyc mocha --opts \"./server/test/mocha.opts\" server/test",
     "migrate": "mongoimport -h mongo:27017 -d matches -c matches --file /home/app/server/lib/db/matches_import.json",
-    "migrate-with-test": "yarn migrate && yarn test"
+    "migrate-with-test": "yarn migrate && yarn test",
+    "migrate-and-start": "yarn migrate && yarn start"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
