@@ -1,7 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const HeaderWrapper = styled.div`
+  text-align: center;
+`;
 
 const Header = () => (
-  <div>BLABLABLA</div>
+  <HeaderWrapper>HEADER</HeaderWrapper>
 );
 
 export default Header;

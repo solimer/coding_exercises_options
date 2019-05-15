@@ -5,7 +5,8 @@ const {
 const { id: activeUserId } = require('../utils/user')();
 
 const filter = async (params) => {
-  const data = DB.getAll().filter(entry => entry.id !== activeUserId);
+  let data = await DB.getAll();
+  data = data.filter(entry => entry.id !== activeUserId);
   if (!params) return data;
 
   return Object.keys(params).reduce((acc, fName) => {

@@ -16,9 +16,10 @@ describe('API Integration Tests', () => {
   after(() => { this.activeUserStub.restore(); });
 
   it('should return all matches except active user', () => request.get('/matches')
-    .expect(({ body, status }) => {
+    .expect(async ({ body, status }) => {
       body.should.an.Array();
-      body.should.have.length(DB.getAll().length - 1);
+      const eCount = await DB.getElementCount();
+      body.should.have.length(eCount - 1);
       status.should.be.eql(200);
       const { id: activeUserId } = DB.getActiveUserData();
       body.forEach(entry => entry.id !== activeUserId);
@@ -34,13 +35,9 @@ describe('API Integration Tests', () => {
       });
     }));
 
-  it('show return error message when incorrect property', () => request.get('/matches')
-    .query({ hasPhoto: true, compatibility: '>40<50' })
-    .expect(({ body }) => {
-      body.should.be.an.Array();
-      body.forEach((entry) => {
-        entry.main_photo.should.not.be.null();
-        entry.compatibility_score.should.be.within(0.4, 0.5);
-      });
-    }));
+  it('should return correct data and schema from the db', async () => {
+    const result = await DB.getAll();
+    result.should.be.an.Array();
+    result.length.should.be.aboveOrEqual(1);
+  });
 });

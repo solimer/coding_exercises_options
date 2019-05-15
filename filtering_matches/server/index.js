@@ -1,8 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const mongoose = require('mongoose');
 const routes = require('./lib/routes');
 const config = require('../config');
+
+mongoose.connect('mongodb://admin:Sparks123@ds157256.mlab.com:57256/matches', { useNewUrlParser: true });
+// mongoose.set('useCreateIndex', true);
+// mongoose.Promise = global.Promise;
 
 const app = express();
 const port = config.server.port || 5000;
