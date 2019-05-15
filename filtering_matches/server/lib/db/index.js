@@ -13,6 +13,10 @@ class DB {
   static getElementCount() {
     return Match.countDocuments();
   }
+
+  static getBooleanFilter(value) {
+    return Match.find({ favourite: value == 'true' });
+  }
 }
 
 module.exports = DB;

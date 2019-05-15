@@ -5,9 +5,14 @@ const {
 const { id: activeUserId } = require('../utils/user')();
 
 const filter = async (params) => {
+  if (Object.keys(params).length === 1 && params.isFavourite) {
+    return DB.getBooleanFilter(params.isFavourite);
+  }
+
   let data = await DB.getAll();
   data = data.filter(entry => entry.id !== activeUserId);
   if (!params) return data;
+
 
   return Object.keys(params).reduce((acc, fName) => {
     switch (fName) {
